@@ -10,7 +10,10 @@ function! ale_linters#coffee#coffeelint#GetExecutable(buffer) abort
 endfunction
 
 function! ale_linters#coffee#coffeelint#GetCommand(buffer) abort
+    let l:options = ale#Var(a:buffer, 'coffee_coffeelint_options')
+
     return ale_linters#coffee#coffeelint#GetExecutable(a:buffer)
+    \   . (!empty(l:options) ? ' ' . l:options : '')
     \   . ' --stdin --reporter csv'
 endfunction
 
